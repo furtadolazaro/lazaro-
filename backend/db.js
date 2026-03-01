@@ -11,16 +11,80 @@ const db = new sqlite3.Database(dbPath, (err) => {
   }
 });
 
-const chiefAdmin = {
-  nome: 'lazaro furtado carrilho neto',
-  email: 'lfurradocarrilhoneto@gmail.com',
-  matricula: '09824649166',
-  senha: '@LFCNe2025',
-  status: 'aprovado',
-  role: 'chief'
-};
+function getChiefAdminFromEnv() {
+  const nome = process.env.CHIEF_ADMIN_NOME;
+  const email = process.env.CHIEF_ADMIN_EMAIL;
+  const matricula = process.env.CHIEF_ADMIN_MATRICULA;
+  const senha = process.env.CHIEF_ADMIN_SENHA;
+
+  if (!nome && !email && !matricula && !senha) {
+    return null;
+  }
+
+  if (!nome || !email || !matricula || !senha) {
+    console.error(
+      'Bootstrap do admin-chefe ignorado: defina CHIEF_ADMIN_NOME, CHIEF_ADMIN_EMAIL, CHIEF_ADMIN_MATRICULA e CHIEF_ADMIN_SENHA.'
+    );
+    return null;
+  }
+
+  return {
+    nome: nome.trim(),
+    email: email.trim().toLowerCase(),
+    matricula: matricula.trim(),
+    senha,
+    status: 'aprovado',
+    role: 'chief'
+  };
+}
+
+function ensureChiefAdmin(chiefAdmin) {
+  if (!chiefAdmin) {
+    return;
+  }
+
+  db.get(
+    'SELECT id FROM admins WHERE matricula = ? OR email = ?',
+    [chiefAdmin.matricula, chiefAdmin.email],
+    async (err, row) => {
+      if (err) {
+        console.error('Erro ao buscar admin-chefe:', err.message);
+        return;
+      }
+
+      if (!row) {
+        try {
+          const hash = await bcrypt.hash(chiefAdmin.senha, 10);
+          db.run(
+            `INSERT INTO admins (nome, email, matricula, senha, status, role)
+             VALUES (?, ?, ?, ?, ?, ?)`,
+            [
+              chiefAdmin.nome,
+              chiefAdmin.email,
+              chiefAdmin.matricula,
+              hash,
+              chiefAdmin.status,
+              chiefAdmin.role
+            ],
+            (insertErr) => {
+              if (insertErr) {
+                console.error('Erro ao criar admin-chefe via variáveis de ambiente:', insertErr.message);
+              } else {
+                console.log('Admin-chefe inicial criado com sucesso via variáveis de ambiente.');
+              }
+            }
+          );
+        } catch (hashErr) {
+          console.error('Erro ao gerar hash para o admin-chefe:', hashErr.message);
+        }
+      }
+    }
+  );
+}
 
 function initializeDatabase() {
+  const chiefAdmin = getChiefAdminFromEnv();
+
   db.serialize(() => {
     db.run(`
       CREATE TABLE IF NOT EXISTS admins (
@@ -45,39 +109,7 @@ function initializeDatabase() {
       )
     `);
 
-    db.get(
-      'SELECT id FROM admins WHERE matricula = ?',
-      [chiefAdmin.matricula],
-      async (err, row) => {
-        if (err) {
-          console.error('Erro ao buscar admin chefe:', err.message);
-          return;
-        }
-
-        if (!row) {
-          const hash = await bcrypt.hash(chiefAdmin.senha, 10);
-          db.run(
-            `INSERT INTO admins (nome, email, matricula, senha, status, role)
-             VALUES (?, ?, ?, ?, ?, ?)`,
-            [
-              chiefAdmin.nome,
-              chiefAdmin.email,
-              chiefAdmin.matricula,
-              hash,
-              chiefAdmin.status,
-              chiefAdmin.role
-            ],
-            (insertErr) => {
-              if (insertErr) {
-                console.error('Erro ao criar admin chefe:', insertErr.message);
-              } else {
-                console.log('Admin-chefe inicial criado com sucesso.');
-              }
-            }
-          );
-        }
-      }
-    );
+    ensureChiefAdmin(chiefAdmin);
   });
 }
 

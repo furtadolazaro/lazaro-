@@ -52,13 +52,16 @@ Servidor padrão: `http://localhost:3000`
 - Página pública: `http://localhost:3000/`
 - Login admin: `http://localhost:3000/admin/login.html`
 
-## Credencial inicial (admin-chefe)
+## Bootstrap opcional do admin-chefe
 
-- Nome: lazaro furtado carrilho neto
-- Email: lfurradocarrilhoneto@gmail.com
-- Matrícula: 09824649166
-- Senha: @LFCNe2025
-- Status: aprovado
+Para criar um admin-chefe inicial de forma segura em ambientes novos, defina **todas** as variáveis abaixo antes de iniciar o backend:
+
+- `CHIEF_ADMIN_NOME`
+- `CHIEF_ADMIN_EMAIL`
+- `CHIEF_ADMIN_MATRICULA`
+- `CHIEF_ADMIN_SENHA`
+
+Se qualquer uma estiver ausente, nenhum admin-chefe é criado automaticamente.
 
 ## API principal
 
@@ -82,7 +85,7 @@ Servidor padrão: `http://localhost:3000`
    - **Build Command**: `npm install`
    - **Start Command**: `node server.js`
 4. Variáveis de ambiente:
-   - `JWT_SECRET` (obrigatório em produção)
+   - `JWT_SECRET` (obrigatório para iniciar o servidor)
    - `PORT` é gerenciada automaticamente pelo Render
 
 ### Opção 2: Usando `render.yaml`
@@ -91,6 +94,6 @@ Este repositório inclui arquivo `render.yaml` para deploy Blueprint.
 
 ## Observações de produção
 
-- Troque `JWT_SECRET` por um valor forte em produção.
+- Defina `JWT_SECRET` com um valor forte e único por ambiente.
 - O SQLite é salvo em arquivo local (`backend/database.sqlite`).
 - Em plano gratuito, ao reiniciar a instância os dados podem ser perdidos dependendo do ambiente; para persistência crítica use banco gerenciado.

@@ -11,7 +11,11 @@ const { db, initializeDatabase } = require('./db');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const JWT_SECRET = process.env.JWT_SECRET || 'troque-essa-chave-em-producao';
+const JWT_SECRET = process.env.JWT_SECRET;
+
+if (!JWT_SECRET) {
+  throw new Error('A variável de ambiente JWT_SECRET é obrigatória para iniciar o servidor.');
+}
 
 initializeDatabase();
 
