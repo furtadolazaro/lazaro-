@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel Administrativo | ProfEPT</title>
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body>
+    <header class="admin-header">
+      <h1>Painel Administrativo ProfEPT</h1>
+      <div class="header-actions">
+        <span id="adminWelcome"></span>
+        <button id="logoutBtn" class="secondary">Sair</button>
+      </div>
+    </header>
+
+    <main class="admin-grid">
+      <section class="admin-card">
+        <h2>1) Upload de Excel (.xlsx)</h2>
+        <form id="uploadForm">
+          <input type="file" id="excelFile" accept=".xlsx" required />
+          <button type="submit">Enviar Arquivo</button>
+        </form>
+        <p id="uploadMessage" class="status"></p>
+      </section>
+
+      <section class="admin-card">
+        <h2>2) Lista de Uploads</h2>
+        <button id="reloadUploads" class="secondary">Atualizar Lista</button>
+        <div id="uploadsList" class="list"></div>
+      </section>
+
+      <section class="admin-card">
+        <h2>3) Gestão de Usuários</h2>
+        <form id="newAdminForm" class="mini-form">
+          <h3>Cadastrar novo admin (status pendente)</h3>
+          <input id="newNome" type="text" placeholder="Nome" required />
+          <input id="newEmail" type="email" placeholder="Email" required />
+          <input id="newMatricula" type="text" placeholder="Matrícula" required />
+          <input id="newSenha" type="password" placeholder="Senha" required />
+          <button type="submit">Cadastrar Admin</button>
+        </form>
+
+        <button id="reloadAdmins" class="secondary">Atualizar Admins</button>
+        <div id="adminsList" class="list"></div>
+      </section>
+    </main>
+
+    <script src="admin.js"></script>
+  </body>
+</html>

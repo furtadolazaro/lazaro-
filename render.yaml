@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: profept-ifgoiano-ceres
+    env: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
+    plan: free
+    envVars:
+      - key: JWT_SECRET
+        sync: false
