@@ -1,0 +1,151 @@
+:root {
+  --green-dark: #006400;
+  --green-medium: #0b7a0b;
+  --green-light: #d8f3dc;
+  --white: #ffffff;
+  --text: #1f2937;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  background: linear-gradient(180deg, #f1f9f1 0%, #ffffff 100%);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+.top-header {
+  background: var(--white);
+  border-bottom: 4px solid var(--green-dark);
+  padding: 1.2rem 1rem;
+  display: grid;
+  grid-template-columns: 100px 1fr 100px;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.top-header h1 {
+  color: var(--green-dark);
+  font-size: clamp(1.1rem, 2.6vw, 1.7rem);
+}
+
+.title-wrapper {
+  display: grid;
+  gap: 0.8rem;
+  justify-items: center;
+}
+
+.admin-link {
+  text-decoration: none;
+  background: var(--green-dark);
+  color: var(--white);
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.admin-link:hover {
+  background: var(--green-medium);
+  transform: translateY(-1px);
+}
+
+.logo {
+  width: 100%;
+  max-width: 85px;
+  justify-self: center;
+}
+
+.container {
+  width: min(1080px, 92%);
+  margin: 2.2rem auto;
+  display: grid;
+  gap: 1.6rem;
+}
+
+.card {
+  background: var(--white);
+  border-radius: 18px;
+  padding: 1.7rem;
+  box-shadow: var(--shadow);
+}
+
+.card h2 {
+  color: var(--green-dark);
+  margin-bottom: 1rem;
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.2rem;
+}
+
+.chart-card {
+  background: #f9fffa;
+  border: 1px solid #cce6cf;
+  border-radius: 14px;
+  padding: 1rem;
+  min-height: 320px;
+}
+
+.chart-card h3 {
+  color: var(--green-medium);
+  margin-bottom: 0.85rem;
+}
+
+.empty {
+  background: var(--green-light);
+  color: #14532d;
+  border-radius: 10px;
+  padding: 0.9rem;
+  font-weight: 600;
+}
+
+.hidden {
+  display: none;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  background: var(--green-dark);
+  color: var(--white);
+  font-size: 0.92rem;
+}
+
+@media (max-width: 860px) {
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .top-header {
+    grid-template-columns: 80px 1fr 80px;
+  }
+}
+
+@media (max-width: 560px) {
+  .top-header {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .logo {
+    max-width: 70px;
+  }
+
+  .card {
+    padding: 1.2rem;
+  }
+}

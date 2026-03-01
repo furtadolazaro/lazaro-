@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Administrativo | ProfEPT</title>
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body>
+    <main class="auth-container">
+      <section class="auth-card">
+        <h1>Painel Administrativo ProfEPT</h1>
+        <p>Faça login com matrícula e senha.</p>
+
+        <form id="loginForm">
+          <label for="matricula">Matrícula</label>
+          <input id="matricula" type="text" required />
+
+          <label for="senha">Senha</label>
+          <input id="senha" type="password" required />
+
+          <button type="submit">Entrar</button>
+        </form>
+
+        <p id="loginMessage" class="status"></p>
+      </section>
+    </main>
+
+    <script src="admin.js"></script>
+  </body>
+</html>

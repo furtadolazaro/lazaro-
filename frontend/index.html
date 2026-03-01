@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ProfEPT IF Goiano - Campus Ceres</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <header class="top-header">
+      <img
+        src="https://profept.ifes.edu.br/images/logo_profept.png"
+        alt="Logo ProfEPT"
+        class="logo"
+      />
+      <div class="title-wrapper">
+        <h1>
+          Programa de Pós-Graduação em Educação Profissional e Tecnológica
+        </h1>
+        <a class="admin-link" href="/admin/login.html">Acesso Administrativo</a>
+      </div>
+      <img
+        src="https://www.ifgoiano.edu.br/home/images/ifgoiano_logo.png"
+        alt="Logo IF Goiano"
+        class="logo"
+      />
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <h2>Sobre o ProfEPT</h2>
+        <p>
+          O Programa de Pós-Graduação em Educação Profissional e Tecnológica –
+          ProfEPT é um programa de mestrado profissional que visa qualificar
+          professores e profissionais da Educação Profissional e Tecnológica,
+          promovendo práticas pedagógicas inovadoras e fortalecendo políticas
+          públicas educacionais.
+        </p>
+        <p>
+          O programa articula teoria e prática para ampliar a formação docente e
+          contribuir com a melhoria da educação técnica e tecnológica no Brasil.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Painel de Dados Aprovados</h2>
+        <p id="emptyMessage" class="empty hidden">
+          Ainda não há dados aprovados para exibição pública.
+        </p>
+
+        <div id="chartsWrapper" class="charts-grid hidden">
+          <article class="chart-card">
+            <h3>Você é egresso(a) de:</h3>
+            <canvas id="egressoChart"></canvas>
+          </article>
+
+          <article class="chart-card">
+            <h3>Como você se autodeclara?</h3>
+            <canvas id="autodeclaracaoChart"></canvas>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Instituto Federal Goiano – Campus Ceres | ProfEPT © 2024 | Lázaro
+      Furtado Carrilho Neto
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
